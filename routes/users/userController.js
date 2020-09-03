@@ -3,8 +3,8 @@
  */
 const pool = require('../../config/dbConfig');
 
-class UserController {
+class userController {
   
 }
 
-module.exports = UserController;
+module.exports = userController;
