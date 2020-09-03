@@ -1,9 +1,22 @@
-var express = require('express');
-var router = express.Router();
+/**
+ *
+ */
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+/** Routes */
+const mainRouter = require('./main');
+const usersRouter = require('./users');
 
-module.exports = router;
+const getRouter = (path, controller) => ({ path, controller });
+
+const routes = [
+  getRouter('/', mainRouter),
+  getRouter('/users', usersRouter),
+  getRouter('/*', (req, res) => {
+    res.send({
+      status: 404,
+      message: 'Empty API',
+    });
+  }),
+];
+
+module.exports = routes;
