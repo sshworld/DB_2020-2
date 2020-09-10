@@ -3,11 +3,22 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 const Routes = require('./routes');
 
 
 var app = express();
+
+
+// session
+app.use(session({  
+  secret: '56781234%^&*!#$',  // 암호화
+  resave: false,
+  saveUninitialized: true
+  //,
+  //store: new FileStore()
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

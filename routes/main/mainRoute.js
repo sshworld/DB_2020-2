@@ -9,7 +9,8 @@ const mainController = require("./mainController");
 const main = new mainController();
 
 router.get('/',main.hello, (req, res) => {
-    res.render('index.ejs', {pages: './home/main.ejs'});
+    var sess = req.session.USER_ID;
+    res.render('index.ejs', {pages: './home/main.ejs', sess : sess});
 });
 
 
