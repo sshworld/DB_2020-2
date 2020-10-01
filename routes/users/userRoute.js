@@ -20,7 +20,7 @@ router.post('/goLogin', User.goLogin, (req, res) => {
     res.send(
         `<script type="text/javascript">
         alert("로그인 성공"); 
-        location.href='/users/success';
+        location.href='/';
         </script>`
     );
 });
@@ -36,15 +36,15 @@ router.post('/goSign', User.goSign ,(req, res) => {
     res.send(
         `<script type="text/javascript">
         alert("회원가입 성공");
-        location.href='/users/success';
+        location.href='/';
         </script>`
     );
 });
 
-// 성공
-router.get('/success', (req, res) => {
+// 회원정보
+router.get('/account', User.account, (req, res) => {
     var sess = req.session.USER_ID;
-    res.render('index.ejs', {pages: './users/success.ejs', sess: sess});
+    res.render('index.ejs', {pages: './users/account.ejs', sess:sess});
 });
 
 // 로그아웃

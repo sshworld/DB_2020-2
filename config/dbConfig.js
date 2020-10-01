@@ -1,11 +1,14 @@
+const config = require('./config.json')["labtop"]
+// const config = require('./config.json')["computer"]
+
 const mysql = require('mysql');
 
 const pool = mysql.createPool({
-    host: 'localhost',
-    port: '3306',
-    user: 'root',
-    password: 'tjdgjs1218',
-    database: 'DB_PROJECT'
+    host: config.host,
+    port: 3306,
+    user: config.user,
+    password: config.password,
+    database: config.database
 });
 
 module.exports = pool;

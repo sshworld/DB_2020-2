@@ -1,0 +1,15 @@
+{
+    "computer" : {
+        "host" : "localhost",
+        "user" : "root",
+        "password" : "tjdgjs1218",
+        "database" : "DB_PROJECT"
+    },
+
+    "labtop" : {
+        "host" : "localhost",
+        "user" : "root",
+        "password" : "",
+        "database" : "DB_PROJECT"
+    }
+}

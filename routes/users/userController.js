@@ -45,6 +45,10 @@ class userController {
         
     }
     
+    async account(req, res, next) {
+        
+    }
+    
     async goLogout(req, res, next) {
         req.session.destroy();
         res.clearCookie('USER_ID');
