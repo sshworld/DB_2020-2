@@ -45,7 +45,7 @@ class userController {
     }
     
     async account(req, res, next) {
-        
+        next();
     }
     
     async goLogout(req, res, next) {
