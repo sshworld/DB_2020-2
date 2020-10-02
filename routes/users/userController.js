@@ -1,26 +1,25 @@
 /**
  * UserController
  */
-const pool = require('../../config/dbConfig');
+const db = require('../../config/dbConfig');
 
 class userController {
 
     async goLogin(req, res, next) {
-        var { USER_ID, USER_PW} = req.body;
+        try {
+            const USER_ID = req.body.USER_ID;
+            const USER_PW = req.body.USER_PW;
 
-        pool.getConnection((err, conn) => {
-            var sql = `SELECT * FROM USERS WHERE USER_ID = "${USER_ID}" AND USER_PW = "${USER_PW}"`;
-    
-            conn.query(sql, function(err, row) {
-                if(err) console.log('query is not excuted. insert fail...\n' + err);
-                else {
-                    req.session.USER_ID = row[0].USER_ID;
-                    next();
-                }
+            let userData = await db("SELECT * FROM USERS WHERE USER_ID = ? AND USER_PW = ? ", [USER_ID, USER_PW]);
 
-                
-            });
-        });
+            req.session.USER_ID = userData[0].USER_ID;
+            console.log(USER_ID)
+            next();
+
+        } catch(error) {
+            console.log(error)
+           
+        }
     
         
     }
