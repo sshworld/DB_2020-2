@@ -1,5 +1,5 @@
-const config = require('./config.json')["labtop"]
-//const config = require('./config.json')["computer"]
+//const config = require('./config.json')["labtop"]
+const config = require('./config.json')["computer"]
 
 const mysql = require('mysql2/promise');
 
