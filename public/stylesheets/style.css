@@ -65,3 +65,29 @@ body {
 .comment-reply-enabled .comment-reply {
   display:inherit;
 }
+
+@media (min-width:768px){
+  .navbar-collapse{ 
+    float:left
+  }
+}
+
+@media (max-width:767px){
+  .navbar-form.navbar-right{
+        border-color: #101010;
+        width: calc(100% - 30px);
+        padding: 0;
+        border: none;
+   }
+   .navbar{
+     border:none;
+   }
+   .navbar-collapse{  
+     background-color: #222;
+     position: absolute;
+     top: 50px;
+     width: 100%;
+     left:0;
+     margin:0 !important;
+   }
+}
