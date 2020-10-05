@@ -50,7 +50,12 @@ router.get('/account', User.account, (req, res) => {
 // 로그아웃
 router.get('/logout', User.goLogout, (req, res) => {
     var sess = null;
-    res.render('index.ejs', {pages: './home/main.ejs', sess: sess});
+    res.send(
+        `<script type="text/javascript">
+        alert("로그아웃 하였습니다.");
+        location.href='/';
+        </script>`
+    );
 });
 
 module.exports = router;

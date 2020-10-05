@@ -5,10 +5,10 @@
 
 const express = require("express");
 const router = express.Router();
-const mainController = require("./mainController");
-const main = new mainController();
+const basketController = require("./basketController");
+const basket = new basketController();
 
-router.get('/',main.hello, (req, res) => {
+router.get('/:id', (req, res) => {
     var sess = req.session.USER_ID;
     var userName = req.session.USER_NAME;
     res.render('index.ejs', {pages: './home/main.ejs', sess : sess, userName : userName});

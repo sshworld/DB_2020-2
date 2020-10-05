@@ -1,15 +1,15 @@
 /**
- * Visit API
+ * listController
  *
  */
 
 const db = require('../../config/dbConfig');
 
-class mainController {
+class basketController {
   async hello(req, res, next) {
     
     next();
   }
 }
 
-module.exports = mainController;
+module.exports = basketController;
