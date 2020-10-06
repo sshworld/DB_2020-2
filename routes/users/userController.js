@@ -14,7 +14,6 @@ class userController {
 
             req.session.USER_ID = userData[0].USER_ID;
             req.session.USER_NAME = userData[0].USER_NAME;
-            console.log(USER_ID)
             next();
 
         } catch (error) {
