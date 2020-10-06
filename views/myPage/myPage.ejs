@@ -1,76 +1,69 @@
 <div class="container h-100">
-    <div class="user-form container">
-        <% if (userName != null) { %>
-        <h2><%=userName %> 님의 마이페이지</h2>
+  <div class="user-form container">
+    <% if (userName != null) { %>
+    <h2><%=userName %> 님의 마이페이지</h2>
+    <% } %>
+  </div>
+  <br />
+
+  <div class="">
+    <table class="table table-striped">
+      <h1>Address</h1>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">우편번호</th>
+          <th scope="col">기본주소</th>
+          <th scope="col">상세주소</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = 0; i < myAddr.length; i++) {%>
+        <tr>
+          <th scope="row"><%= i+1 %></th>
+          <td><%=myAddr[i].SHIPPING_NUM %></td>
+          <td><%=myAddr[i].BASIC_ADDR %></td>
+          <td><%=myAddr[i].DETAIL_ADDR %></td>
+        </tr>
         <% } %>
+      </tbody>
+    </table>
+    <a href="/myPage/<%=sess%>/addr">+추가</a>
+  </div>
+  <br /><br />
 
-    </div><br>
-
-    <div class="container">
-        <table class="table table-striped">
-            <h1>Address</h1>
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-    </div><br><br>
-
-    <div class="">
-        <table class="table table-striped">
-            <h1>Card</h1>
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">카드번호</th>
-                    <th scope="col">유효기간</th>
-                    <th scope="col">카드종류</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <div class="">
+    <table class="table table-striped">
+      <h1>Card</h1>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">카드번호</th>
+          <th scope="col">유효기간</th>
+          <th scope="col">카드종류</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>Larry</td>
+          <td>the Bird</td>
+          <td>@twitter</td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="/myPage/<%=sess%>/card">+추가</a>
+  </div>
 </div>
