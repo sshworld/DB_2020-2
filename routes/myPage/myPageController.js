@@ -85,27 +85,10 @@ class myPageController {
   async deleteAddr(req, res, next) {
     try {
 
-      const userId = req.params["id"];
       const ADDR_UID = req.params["uid"];
 
-      async function confirm() {
-        return `<script type="text/javascript"> confirm("정말 삭제하시겠습니까?")</script>`
-      }
-
-      if (confirm() == true) {
-        await db("DELETE FROM ADDR_INFO WHERE ADDR_UID = ?", [ADDR_UID]);
-        next();
-
-      } else {
-
-        res.send(
-          `<script type="text/javascript">
-                alert("정보를 똑바로 입력하세요"); 
-                location.href='/myPage/` +
-          userId +
-          `';</script>`
-        );
-      }
+      await db("DELETE FROM ADDR_INFO WHERE ADDR_UID = ?", [ADDR_UID]);
+      next();
 
     } catch (error) {
       console.log(error)
@@ -145,8 +128,47 @@ class myPageController {
   }
 
   // 카드 수정
+  async updateCard(req, res, next) {
+    try {
+
+      const userId = req.params["id"];
+      const OLD_CARD_ID = req.params["uid"];
+      const CARD_ID = req.body.CARD_ID;
+      const CARD_DATE = req.body.CARD_DATE;
+      const CARD_TYPE = req.body.CARD_TYPE;
+
+      if (CARD_ID == '' || CARD_DATE == '' || CARD_TYPE == '') {
+        res.send(
+          `<script type="text/javascript">
+                alert("정보를 똑바로 입력하세요"); 
+                location.href='/myPage/` +
+          userId +
+          `/addAddr';</script>`
+        );
+      } else {
+        await db("UPDATE CARD SET CARD_ID = ?, CARD_DATE = ?, CARD_TYPE = ? WHERE CARD_ID = ?", [CARD_ID, CARD_DATE, CARD_TYPE, OLD_CARD_ID]);
+
+        next();
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // 카드 삭제
+  async deleteCard(req, res, next) {
+    try {
+
+      const CARD_ID = req.params["uid"];
+
+      await db("DELETE FROM CARD WHERE CARD_ID = ?", [CARD_ID]);
+      next();
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 module.exports = myPageController;

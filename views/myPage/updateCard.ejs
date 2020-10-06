@@ -1,0 +1,55 @@
+<!------------------------------------카드----------------------------------------------->
+<form
+  class="user-form container h-100"
+  action="/myPage/<%=sess%>/<%=uid%>/updateCard"
+  method="post"
+>
+  <div class="form-group">
+    <div class="form-group row">
+      <label for="CARD_ID" class="col-sm-3 col-form-label">CARD_ID</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="CARD_ID"
+          name="CARD_ID"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="CARD_DATE" class="col-sm-3 col-form-label">CARD_DATE</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="CARD_DATE"
+          name="CARD_DATE"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="CARD_TYPE" class="col-sm-3 col-form-label">CARD_TYPE</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="CARD_TYPE"
+          name="CARD_TYPE"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <div class="form-group">
+    <br />
+    <button type="submit" class="btn btn-primary btn-block mb-4">
+      Confirm
+    </button>
+  </div>
+</form>
