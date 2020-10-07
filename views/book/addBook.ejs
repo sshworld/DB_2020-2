@@ -1,0 +1,100 @@
+<!--------------------------------------책 추가----------------------------------------------->
+<form
+  class="user-form container h-100"
+  action="/book/additionBook"
+  method="post"
+>
+<h1>BOOK 등록</h1>
+  <div class="form-group">
+    <div class="form-group row">
+      <label for="BOOK_NAME"" class="col-sm-3 col-form-label">책 이름</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="BOOK_NAME"
+          name="BOOK_NAME"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_PUBLISH" class="col-sm-3 col-form-label">출판사</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="BOOK_PUBLISH"
+          name="BOOK_PUBLISH"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_AUTHOR" class="col-sm-3 col-form-label">저자</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="BOOK_AUTHOR"
+          name="BOOK_AUTHOR"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_DETAIL" class="col-sm-3 col-form-label">상세정보</label>
+      <div class="col-sm-9">
+        <textarea id="BOOK_DETAIL" name="BOOK_DETAIL" value="" class="form-control" rows="4"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_PRICE" class="col-sm-3 col-form-label">가격</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="BOOK_PRICE"
+          name="BOOK_PRICE"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_COUNT" class="col-sm-3 col-form-label">수량</label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          id="BOOK_COUNT"
+          name="BOOK_COUNT"
+          value=""
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="BOOK_FILE" class="col-sm-3 col-form-label">책 사진</label>
+      <div class="col-sm-9">
+        <input
+          type="file"
+          id="BOOK_FILE"
+          name="BOOK_FILE"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <div class="form-group">
+    <br />
+    <button type="submit" class="btn btn-primary btn-block mb-4">
+      Confirm
+    </button>
+  </div>
+</form>
