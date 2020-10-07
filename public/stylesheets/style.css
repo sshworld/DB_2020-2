@@ -1,6 +1,11 @@
 body {
   font-family: 'Open Sans', sans-serif;
 }
+
+table {
+  text-align: center; margin: auto; width: 60%; height: 100px;
+}
+
 .breadcrumb-item {
   font-size: 0.8em !important;
 }
