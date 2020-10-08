@@ -75,5 +75,4 @@ router.get('/:uid/deleteBook', book.deleteBook, (req, res) => {
   res.send(`<script type="text/javascript"> alert("책 삭제 성공"); location.href='/book';</script>`);
 })
 
-
 module.exports = router;

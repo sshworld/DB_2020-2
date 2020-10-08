@@ -1,46 +1,47 @@
 <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">책 사진</th>
-        <th scope="col">책 이름</th>
-        <th scope="col">출판사 / 저자</th>
-        <th scope="col">책 상세 정보</th>
-        <th scope="col">책 가격</th>
-        <th scope="col">책 수량</th>
-        <th scope="col"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% for(var i = 0; i < bookInfo.length; i++) {%>
-      <tr>
-        <td><img src="/images/book/<%=bookInfo[i].BOOK_PATH%>" alt="<%=i + 1%>" width="200" height="200"></td>
-        <td><%=bookInfo[i].BOOK_NAME %></td>
-        <td><%=bookInfo[i].BOOK_PUBLISH %> / <%=bookInfo[i].BOOK_AUTHOR %></td>
-        <td><%=bookInfo[i].BOOK_DETAIL %></td>
-        <td><%=bookInfo[i].BOOK_PRICE %>원</td>
-        <td><%=bookInfo[i].BOOK_COUNT %>개</td>
-        <td>
-          <a href="/book/<%=bookInfo[i].BOOK_UID%>/book">수정</a>&nbsp;&nbsp;&nbsp;<a style="cursor: pointer" onclick="deleteInfo('/book/<%=bookInfo[i].BOOK_UID%>/deleteBook')">삭제</a>
-        </td>
-      </tr>
-      <% } %>
-      
-    </tbody>
-  </table>
-  <a href="/book/addBook">+추가</a>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">책 사진</th>
+      <th scope="col">책 이름</th>
+      <th scope="col">출판사 / 저자</th>
+      <th scope="col">책 상세 정보</th>
+      <th scope="col">책 가격</th>
+      <th scope="col">책 수량</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for(var i = 0; i < bookInfo.length; i++) {%>
+    <tr>
+      <td><img src="/images/book/<%=bookInfo[i].BOOK_PATH%>" alt="<%=i + 1%>" width="200" height="200"></td>
+      <td><%=bookInfo[i].BOOK_NAME %></td>
+      <td><%=bookInfo[i].BOOK_PUBLISH %> / <%=bookInfo[i].BOOK_AUTHOR %></td>
+      <td><%=bookInfo[i].BOOK_DETAIL %></td>
+      <td><%=bookInfo[i].BOOK_PRICE %>원</td>
+      <td><%=bookInfo[i].BOOK_COUNT %>개</td>
+      <td>
+        <a href="/book/<%=bookInfo[i].BOOK_UID%>/book">수정</a>&nbsp;&nbsp;&nbsp;<a style="cursor: pointer"
+          onclick="deleteInfo('/book/<%=bookInfo[i].BOOK_UID%>/deleteBook')">삭제</a>
+      </td>
+    </tr>
+    <% } %>
+
+  </tbody>
+</table>
+<a href="/book/addBook">+추가</a>
 
 
-  <script>
-    function deleteInfo(url) {
-  
-      var temp = confirm("정말로 삭제하시겠습니까?");
-  
-      if (temp) {
-        location.href = url;
-      }
-      else {
-        location.href = '/book';
-      }
-  
+<script>
+  function deleteInfo(url) {
+
+    var temp = confirm("정말로 삭제하시겠습니까?");
+
+    if (temp) {
+      location.href = url;
     }
-  </script>
+    else {
+      location.href = '/book';
+    }
+
+  }
+</script>

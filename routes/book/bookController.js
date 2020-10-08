@@ -69,6 +69,8 @@ class bookController {
     }
   }
 
+  // 책 수정
+
   async updateBook(req, res, next) {
     try {
 
@@ -103,6 +105,8 @@ class bookController {
     }
   }
 
+  // 책 삭제
+
   async deleteBook(req, res, next) {
     try {
 
@@ -116,6 +120,7 @@ class bookController {
     }
 
   }
+
 
 }
 
