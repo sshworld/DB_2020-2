@@ -7,7 +7,7 @@
   </div><br>
   <div class="d-flex justify-content-center h-100">
 
-    <form action="/search" method="post">
+    <form action="/" method="post">
       <div class="searchbar">
         <input class="search_input" type="text" name="bookName" id="bookName" placeholder="Search...">
         <button type="submit" class="search_icon btn"><i class="fas fa-search"></i></button>
@@ -22,14 +22,14 @@
     <% for(var i = 0; i < bookInfo.length; i++) {%>
     <tr>
       <td>
-        <img src="/images/book/<%=bookInfo[i].BOOK_PATH%>" alt="<%=i + 1%>" width="300" height="300">
+        <a href="/book/<%=bookInfo[i].BOOK_UID%>/detail"><img src="/images/book/<%=bookInfo[i].BOOK_PATH%>" alt="<%=i + 1%>" width="300" height="300"></a>
       </td>
       <td width="*" align="left" valign="top">
-        <li><%=bookInfo[i].BOOK_NAME %></li>
-        <li><%=bookInfo[i].BOOK_PUBLISH %> | <%=bookInfo[i].BOOK_AUTHOR %></li>
-        <li><%=bookInfo[i].BOOK_DETAIL %></li>
-        <li><%=bookInfo[i].BOOK_PRICE %>원</li>
-        <li><%=bookInfo[i].BOOK_COUNT %>개</li>
+        <li><a style="color : black" href="/book/<%=bookInfo[i].BOOK_UID%>/detail">책 이름 : <%=bookInfo[i].BOOK_NAME %></a></li>
+        <li>출판사 / 작가 : <%=bookInfo[i].BOOK_PUBLISH %> | <%=bookInfo[i].BOOK_AUTHOR %></li>
+        <li>세부 정보 : <%=bookInfo[i].BOOK_DETAIL %></li>
+        <li>가격 : <%=bookInfo[i].BOOK_PRICE %>원</li>
+        <li>남은 수량 : <%=bookInfo[i].BOOK_COUNT %>개</li>
       </td>
     </tr>
     <% } %>
@@ -41,12 +41,3 @@
   <h1>책이 없습니다 ㅜㅜ</h1>
   <% } %>
 </div>
-
-<script>
-  function search() {
-    var bookName = document.getElementById('bookName').nodeValue;
-
-    location.href = '/main/' + bookName;
-
-  }
-</script>

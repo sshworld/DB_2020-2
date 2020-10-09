@@ -2,6 +2,10 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+li {
+  list-style:none;
+}
+
 table {
   text-align: center; margin: auto; width: 60%; height: 100px;
 }
@@ -121,7 +125,7 @@ body,html{
     border: 0;
     outline: 0;
     background: none;
-    width: 0;
+    width: 450px;
     caret-color:transparent;
     line-height: 40px;
     transition: width 0.4s linear;

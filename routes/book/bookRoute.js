@@ -34,7 +34,7 @@ const upload = multer({
 //---------------------------------------라우터-----------------------------------------
 
 // 책 리스트
-router.get('/', book.bookInfo, (req, res) => {
+router.get('/list', book.bookInfo, (req, res) => {
     var sess = req.session.USER_ID;
     const bookInfo = req.body.bookInfo
     res.render('index.ejs', {pages: './book/bookList.ejs', sess : sess, bookInfo:bookInfo});
@@ -47,7 +47,7 @@ router.get('/addBook', (req, res) => {
 });
 
 router.post('/additionBook', upload.single('BOOK_FILE'), book.addBook, (req, res) => {
-    res.send(`<script type="text/javascript"> alert("책 등록 성공"); location.href='/book';</script>`);
+    res.send(`<script type="text/javascript"> alert("책 등록 성공"); location.href='/book/list';</script>`);
 });
 
 // 책 수정
@@ -66,13 +66,20 @@ router.get("/:uid/book", (req, res) => {
 
 router.post("/:uid/updateBook", upload.single('BOOK_FILE'), book.updateBook, (req, res) => {
   res.send(
-    `<script type="text/javascript"> alert("책 수정 성공"); location.href='/book';</script>`
+    `<script type="text/javascript"> alert("책 수정 성공"); location.href='/book/list';</script>`
   );
 });
 
 // 책 삭제
 router.get('/:uid/deleteBook', book.deleteBook, (req, res) => {
-  res.send(`<script type="text/javascript"> alert("책 삭제 성공"); location.href='/book';</script>`);
+  res.send(`<script type="text/javascript"> alert("책 삭제 성공"); location.href='/book/list';</script>`);
 })
 
+// 책 상세정보
+router.get('/:uid/detail', book.bookDetail, (req, res) => {
+  var sess = req.session.USER_ID;
+  var userName = req.session.USER_NAME;
+  const detailBook = req.body.detailBook[0]
+  res.render("index.ejs", {pages: "./book/bookDetail.ejs", sess: sess, userName: userName, detailBook:detailBook})
+})
 module.exports = router;

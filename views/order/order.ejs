@@ -1,0 +1,55 @@
+<div class="container">
+    <h3>주문</h3>
+
+    <% console.log(myAddr) %>
+
+    <div class="form-group col-md-4">
+        <label for="inputState">배송지 선택</label>
+        <select id="inputState" class="form-control" onchange="selectAddr();">
+            <option value="0" selected>1번째 배송지</option>
+            <% for(var i = 1; i < myAddr.length; i++) {%>
+            <option value="<%=i%>"><%=i+1%>번째 배송지</option>
+            <% } %>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <table class="table table-striped">
+            <h1>Address</h1>
+            <thead>
+              <tr>
+                <th scope="col">우편번호</th>
+                <th scope="col">기본주소</th>
+                <th scope="col">상세주소</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td><input class="form-control" type="text" id="shippingNum" disabled value="<%=myAddr[0].SHIPPING_NUM %>"></td>
+                <td><input class="form-control" type="text" id="basicAddr" disabled value="<%=myAddr[0].BASIC_ADDR %>"></td>
+                <td><input class="form-control" type="text" id="detailAddr" disabled value="<%=myAddr[0].DETAIL_ADDR %>"></td>
+              </tr>
+            </tbody>
+          </table>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    function selectAddr() {
+        $('#inputState').val()
+        alert(myAddr)
+        var select = document.getElementById("inputState");
+
+        // select element에서 선택된 option의 value가 저장된다.
+        var selectValue = select.options[select.selectedIndex].value;
+
+        document.getElementById("shippingNum").value = myAddr[parseInt(selectValue)].SHIPPING_NUM
+        document.getElementById("basicAddr").value = myAddr[parseInt(selectValue)].BASIC_ADDR
+        document.getElementById("detailAddr").value = myAddr[parseInt(selectValue)].DETAIL_ADDR
+
+    }
+
+</script>

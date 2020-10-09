@@ -121,6 +121,23 @@ class bookController {
 
   }
 
+  // 책 상세정보
+
+  async bookDetail(req, res, next) {
+    try {
+
+      const BOOK_UID = req.params["uid"];
+
+      let detailBook = await db("SELECT * FROM BOOK WHERE BOOK_UID = ?", [BOOK_UID]);
+
+      req.body.detailBook = detailBook
+      next();
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
 }
 

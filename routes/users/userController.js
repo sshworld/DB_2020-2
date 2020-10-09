@@ -18,6 +18,12 @@ class userController {
 
         } catch (error) {
             console.log(error)
+            res.send(
+                `<script type="text/javascript">
+                alert("정보를 똑바로 입력하세요"); 
+                location.href='/users/login';
+                </script>`
+            );
 
         }
 
@@ -40,13 +46,20 @@ class userController {
                     </script>`
                 );
             } else {
-                await db("INSERT INTO USERS SET ?", {
+                let signData = await db("INSERT INTO USERS SET ?", {
                     USER_ID: USER_ID,
                     USER_PW: USER_PW,
                     USER_NAME: USER_NAME
                 });
 
-                next();
+                if (signData.errno == 1062) {
+                    res.send(`<script type="text/javascript">
+                alert("이미 사용중인 아이디 입니다."); 
+                location.href='./signup';
+                </script>`);
+                } else {
+                    next()
+                }
             }
 
         } catch (error) {
@@ -56,9 +69,6 @@ class userController {
 
     }
 
-    async account(req, res, next) {
-        next();
-    }
 
     async goLogout(req, res, next) {
         req.session.destroy();

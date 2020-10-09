@@ -1,0 +1,61 @@
+<table class="table container h-100">
+    <tr>
+        <td rowspan="2">
+            <img src="/images/book/<%=detailBook.BOOK_PATH%>" alt="1" width="300" height="300">
+        </td>
+        <td width="*" align="center" valign="top">
+            <li>책 이름 : <%=detailBook.BOOK_NAME %></li>
+            <li>출판사 / 작가 : <%=detailBook.BOOK_PUBLISH %> | <%=detailBook.BOOK_AUTHOR %></li>
+            <li>세부 정보 : <%=detailBook.BOOK_DETAIL %></li>
+            <li>가격 : <%=detailBook.BOOK_PRICE %>원</li>
+            <li>남은 수량 : <%=detailBook.BOOK_COUNT %>개</li>
+        </td>
+    </tr>
+    <tr>
+
+        <td>
+
+            <input class="btn btn-outline-secondary" type="button" id="minus" onclick="minus()" value ="-" disabled>
+            <input type="text" name="bookCount" id="bookCount" value="0" size="2">
+            <input class="btn btn-outline-secondary" type="button" id="plus" onclick="plus();" value="+"><br><br>
+            <input class="btn btn-outline-secondary" type="submit" value="구매하기" onclick="order('/order/<%=detailBook.BOOK_UID%>/');">
+            <input class="btn btn-outline-secondary" type="submit" value="장바구니담기" onclick="basket();">
+
+        </td>
+    </tr>
+</table>
+
+
+<script>
+    function minus() {
+        var btn = document.getElementById('minus');
+
+        document.getElementById('bookCount').value = parseInt(document.getElementById('bookCount').value) - 1;
+
+        if(parseInt(document.getElementById('bookCount').value) == 0) {
+            btn.disabled = true;
+        }
+
+    }
+
+    function plus() {
+        document.getElementById('bookCount').value = parseInt(document.getElementById('bookCount').value) + 1;
+        document.getElementById('minus').disabled = false;
+    }
+
+    function order(url) {
+
+        if(parseInt(document.getElementById('bookCount').value) == 0) {
+            alert("구매 수량이 0개입니다.")
+        }
+        else {
+            location.href = url + document.getElementById('bookCount').value;
+        }
+
+    }
+
+    function basket() {
+
+    }
+
+</script>

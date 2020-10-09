@@ -24,9 +24,9 @@ class mainController {
   async searchBook(req, res, next) {
     try {
 
-      const bookName = req.body.bookName
+      const bookName = '%' + req.params['bookName'] + '%'
 
-      const searchBook = await db("SELECT * FROM BOOK WHERE BOOK_NAME LIKE ?", ['%' + bookName + '%']);
+      const searchBook = await db("SELECT * FROM BOOK WHERE BOOK_NAME LIKE ?", [bookName]);
       req.body.searchInfo = searchBook;
       next();
 

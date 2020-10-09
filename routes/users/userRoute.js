@@ -41,12 +41,6 @@ router.post('/goSign', User.goSign ,(req, res) => {
     );
 });
 
-// 회원정보
-router.get('/account', User.account, (req, res) => {
-    var sess = req.session.USER_ID;
-    res.render('index.ejs', {pages: './users/account.ejs', sess:sess});
-});
-
 // 로그아웃
 router.get('/logout', User.goLogout, (req, res) => {
     var sess = null;
