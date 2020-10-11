@@ -16,13 +16,14 @@
 
   </div>
 
-
+  <br>
 
   <table class="table container h-100">
     <% for(var i = 0; i < bookInfo.length; i++) {%>
     <tr>
       <td>
-        <a href="/book/<%=bookInfo[i].BOOK_UID%>/detail"><img src="/images/book/<%=bookInfo[i].BOOK_PATH%>" alt="<%=i + 1%>" width="300" height="300"></a>
+        <a href="/book/<%=bookInfo[i].BOOK_UID%>/detail"><img src="/images/book/<%=bookInfo[i].BOOK_PATH%>"
+            alt="<%=i + 1%>" width="300" height="300"></a>
       </td>
       <td width="*" align="left" valign="top">
         <li><a style="color : black" href="/book/<%=bookInfo[i].BOOK_UID%>/detail">책 이름 : <%=bookInfo[i].BOOK_NAME %></a></li>

@@ -15,9 +15,12 @@
 
         <td>
 
-            <input class="btn btn-outline-secondary" type="button" id="minus" onclick="minus()" value ="-" disabled>
-            <input type="text" name="bookCount" id="bookCount" value="0" size="2">
-            <input class="btn btn-outline-secondary" type="button" id="plus" onclick="plus();" value="+"><br><br>
+            <input class="btn btn-outline-secondary" type="button" id="minus" onclick="minus('<%=detailBook.BOOK_PRICE %>');" value ="-" disabled>
+            <input type="text" style="text-align: center;" name="bookCount" id="bookCount" value="0" size="1">
+            <input class="btn btn-outline-secondary" type="button" id="plus" onclick="plus('<%=detailBook.BOOK_PRICE %>');" value="+">
+            <br>
+            <input style="border: 0; width: auto; text-align: center;" type="text" id="price" value="" hidden>
+            <br><br>
             <input class="btn btn-outline-secondary" type="submit" value="구매하기" onclick="order('/order/<%=detailBook.BOOK_UID%>/');">
             <input class="btn btn-outline-secondary" type="submit" value="장바구니담기" onclick="basket();">
 
@@ -27,20 +30,27 @@
 
 
 <script>
-    function minus() {
+    function minus(price) {
         var btn = document.getElementById('minus');
 
         document.getElementById('bookCount').value = parseInt(document.getElementById('bookCount').value) - 1;
+        
+        document.getElementById('price').value = parseInt(document.getElementById('bookCount').value) * parseInt(price) + '원'
 
-        if(parseInt(document.getElementById('bookCount').value) == 0) {
+
+        if(parseInt(document.getElementById('bookCount').value) <= 0) {
             btn.disabled = true;
+            document.getElementById('price').hidden = true
         }
 
     }
 
-    function plus() {
+    function plus(price) {
         document.getElementById('bookCount').value = parseInt(document.getElementById('bookCount').value) + 1;
         document.getElementById('minus').disabled = false;
+        document.getElementById('price').hidden = false
+        document.getElementById('price').value = parseInt(document.getElementById('bookCount').value) * parseInt(price) + '원'
+
     }
 
     function order(url) {
