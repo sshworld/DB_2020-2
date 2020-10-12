@@ -1,0 +1,77 @@
+<div class="container h-100">
+    <div class="user-form container">
+      <% if (userName != null) { %>
+      <h2><%=userName %> 님의 주문 상세</h2>
+      <% } %>
+    </div>
+    <br />
+  
+    <div class="">
+      <table class="table table-striped">
+        <h1>Order Detail List</h1>
+        <h3>주문번호 :<%= orderDetail[0].ORDER_NUM + '-' + orderDetail[0].ORDER_ID%> 주문일자 : <%=orderDetail[0].CREATED_AT%></h3>
+        <thead>
+          <tr>
+            <th scope="col" rowspan="3">상품정보</th>
+            <th></th>
+            <th></th>
+            <th scope="col">책금액(수량)</th>
+            <th scope="col">주문금액</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i = orderDetail.length - 1; i >= 0 ; i--) {%>
+          <tr>
+            <td><img src="/images/book/<%=orderDetail[i].BOOK_PATH%>" alt="<%=i%>" width="80" height="80"></td>
+            <td><%=orderDetail[i].BOOK_NAME %><br><%=orderDetail[i].BOOK_PUBLISH%> / <%=orderDetail[i].BOOK_AUTHOR%></td>
+            <td></td>
+            <td><%=orderDetail[i].PRICE %><br><%=orderDetail[i].ORDER_COUNT %></td>
+            <td><%=orderDetail[i].PRICE * orderDetail[i].ORDER_COUNT %>원</td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="">
+        <table class="table table-striped">
+          <h1>Address</h1>
+          <thead>
+            <tr>
+              <th scope="col">우편번호</th>
+              <th scope="col">기본주소</th>
+              <th scope="col">상세주소</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%=myAddr[i].SHIPPING_NUM %></td>
+              <td><%=myAddr[i].BASIC_ADDR %></td>
+              <td><%=myAddr[i].DETAIL_ADDR %></td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <br /><br />
+    
+      <div class="">
+        <table class="table table-striped">
+          <h1>Card</h1>
+          <thead>
+            <tr>
+              <th scope="col">카드번호</th>
+              <th scope="col">유효기간</th>
+              <th scope="col">카드종류</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%=myCard[i].CARD_ID %></td>
+              <td><%=myCard[i].CARD_DATE %></td>
+              <td><%=myCard[i].CARD_TYPE %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

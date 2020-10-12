@@ -83,7 +83,7 @@ class orderController {
         await db("INSERT INTO ORDER_LIST SET ?", {
           ORDER_ID : orderUid[0].ORDER_ID,
           BOOK_UID : orderBook[i].BOOK_UID,
-          BOOK_COUNT : count[i]
+          ORDER_COUNT : count[i]
           
         });
 
@@ -97,17 +97,41 @@ class orderController {
     }
   }
 
+  // 주문 목록
   async orderList(req, res, next) {
     try {
 
       const userId = req.params["id"]
 
-      let orderList = await db("SELECT o.ORDER_ID, b.BOOK_NAME, o.CREATED_AT, o.ORDER_AMOUNT FROM BOOK b, ORDERED o, ORDER_LIST ol WHERE b.BOOK_UID = ol.BOOK_UID AND ol.ORDER_ID = o.ORDER_ID AND o.USER_ID = ? ORDER BY ORDER_ID DESC", [userId])
+      let orderList = await db("SELECT ORDER_ID, BOOK_NAME, DATE_FORMAT(CREATED_AT, '%y-%m-%d') AS CREATED_AT, DATE_FORMAT(CREATED_AT, '%Y%m%d') AS ORDER_NUM ,ORDER_AMOUNT, RANKING, TOTAL FROM ( SELECT o.ORDER_ID, BOOK_NAME, o.CREATED_AT, o.ORDER_AMOUNT, (SELECT COUNT(BOOK_UID) FROM ORDER_LIST WHERE ORDER_ID = o.ORDER_ID) AS TOTAL ,@RANKT := IF(o.ORDER_ID > @LAST , @RANK := @RANK + 1, 0) AS RANKING ,@LAST := o.ORDER_ID FROM (SELECT @RANK := 0, @LAST := 0) XX, ORDERED AS o LEFT OUTER JOIN(SELECT ol.ORDER_ID, b.BOOK_NAME FROM ORDER_LIST ol LEFT OUTER JOIN BOOK b ON b.BOOK_UID = ol.BOOK_UID) AS b ON b.ORDER_ID = o.ORDER_ID WHERE o.USER_ID = ? ORDER BY ORDER_ID ASC) t WHERE RANKING != 0", [userId])
       
+      req.body.orderList = orderList
+
+      next()
       
     } catch (error) {
-
+      console.log(error)
     }
+  }
+
+  // 주문 상세 목록
+  async detailList(req, res, next) {
+    
+    try {
+      const userId = req.params["id"]
+      const BOOK_UID = req.params["uid"]
+
+      let orderDetail = await db("SELECT ol.ORDER_ID, ol.BOOK_UID, DATE_FORMAT(ol.CREATED_AT, '%Y-%m-%d %T') AS CREATE_AT, DATE_FORMAT(ol.CREATED_AT, '%Y%m%d') AS ORDER_NUM, ol.ORDER_COUNT, b.BOOK_PATH, b.BOOK_NAME, b.BOOK_PRICE, b.BOOK_PUBLISH, b.BOOK_AUTHOR FROM ORDER_LIST ol, BOOK b WHERE ol.BOOK_UID = b.BOOK_UID AND ol.ORDER_ID = ?", [BOOK_UID])
+
+      console.log(orderDetail)
+      req.body.orderDetail = orderDetail
+
+      next()
+
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
 

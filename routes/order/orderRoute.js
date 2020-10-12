@@ -10,7 +10,7 @@ const order = new orderController();
 
 
 
-// 하나 주문 시 주문
+// 상세보기에서 주문
 router.get('/:uid/:value', order.singleOrder, (req, res) => {
     var sess = req.session.USER_ID;
     var userName = req.session.USER_NAME;
@@ -27,10 +27,19 @@ router.post('/goOrder', order.purchase, (req, res) => {
 })
 
 // 주문 리스트
-router.get('/:id', (req, res) => {
+router.get('/:id', order.orderList, (req, res) => {
     var sess = req.session.USER_ID;
     var userName = req.session.USER_NAME;
-    res.render('index.ejs', {pages: './order/orderList.ejs', sess : sess, userName : userName});
+    const orderList = req.body.orderList
+    res.render('index.ejs', {pages: './order/orderList.ejs', sess : sess, userName : userName, orderList:orderList});
+})
+
+// 주문 상세 리스트
+router.get('/:id/:uid/detail', order.detailList, (req, res) => {
+    var sess = req.session.USER_ID;
+    var userName = req.session.USER_NAME;
+    const orderDetail = req.body.orderDetail
+    res.render('index.ejs', {pages: './order/orderDetail.ejs', sess : sess, userName : userName, orderDetail:orderDetail});
 })
 
 module.exports = router;
