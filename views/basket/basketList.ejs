@@ -1,50 +1,58 @@
 <div class="container h-100">
-    <div class="user-form container">
-      <% if (userName != null) { %>
-      <h2><%=userName %> 님의 장바구니</h2>
-      <% } %>
-    </div>
-    <br />
-  
-    <div class="">
-      <table class="table table-striped">
-        <h1>BasketList</h1>
-        <h3>장바구니 번호 :<%= orderDetail[0].ORDER_NUM + '-' + orderDetail[0].ORDER_ID%> 생성일자 : <%=orderDetail[0].CREATED_AT%></h3>
-        <thead>
-          <tr>
-            <th scope="col" rowspan="3">상품정보</th>
-            <th></th>
-            <th></th>
-            <th scope="col">책금액(수량)</th>
-            <th scope="col">주문금액</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for(var i = orderDetail.length - 1; i >= 0 ; i--) {%>
-          <tr>
-            <td><img src="/images/book/<%=orderDetail[i].BOOK_PATH%>" alt="<%=i%>" width="80" height="80"></td>
-            <td><%=orderDetail[i].BOOK_NAME %><br><%=orderDetail[i].BOOK_PUBLISH%> / <%=orderDetail[i].BOOK_AUTHOR%></td>
-            <td></td>
-            <td><%=orderDetail[i].BOOK_PRICE %>원<br><%=orderDetail[i].ORDER_COUNT %>권</td>
-            <td><%=orderDetail[i].BOOK_PRICE * orderDetail[i].ORDER_COUNT %>원</td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
-    </div>
-  
+  <div class="user-form container">
+    <% if (userName != null) { %>
+    <h2><%=userName %> 님의 장바구니</h2>
+    <% } %>
+  </div>
+  <br />
+
+  <% if (cartList.length == 0) { %>
+  <h2>장바구니가 텅 비었습니다.</h2>
+  <% } else { %>
+
+  <div class="">
+    <table class="table table-striped">
+      <h1>BasketList</h1>
+      <h3>장바구니 번호 :<%= cartList[0].CART_NUM + '-' + cartList[0].CART_UID%> 생성일자 : <%=cartList[0].CREATED_AT%></h3>
+      <thead>
+        <tr>
+          <th scope="col" rowspan="3">상품정보</th>
+          <th></th>
+          <th></th>
+          <th scope="col">책금액(수량)</th>
+          <th scope="col">주문금액</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i = cartList.length - 1; i >= 0 ; i--) { %>
+        <tr>
+          <td><img src="/images/book/<%=cartList[i].BOOK_PATH%>" alt="<%=i%>" width="80" height="80"></td>
+          <td><%=cartList[i].BOOK_NAME %><br><%=cartList[i].BOOK_PUBLISH%> / <%=cartList[i].BOOK_AUTHOR%></td>
+          <td></td>
+          <td><%=cartList[i].BOOK_PRICE %>원<br><%=cartList[i].CART_COUNT %>권</td>
+          <td><%=cartList[i].BOOK_PRICE * cartList[i].CART_COUNT %>원</td>
+          <td><a style="cursor: pointer"
+              onclick="deleteInfo('/basket/<%=cartList[i].CART_UID%>/<%=cartList[i].BOOK_UID%>/delete')">삭제</a></td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+    <button onclick="location.href = '/basket/<%=cartList[0].CART_UID%>/order';">주문하기</button>
+  </div>
+  <% } %>
+
   <script>
     function deleteInfo(url) {
-  
+
       var temp = confirm("정말로 취소하시겠습니까?");
-  
+
       if (temp) {
         location.href = url;
       }
       else {
-        location.href = '/order/orderList';
+        location.href = '/basket/basketList';
       }
-  
+
     }
   </script>
-  

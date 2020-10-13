@@ -100,6 +100,10 @@ class orderController {
 
       }
 
+      if (orderBook.length > 1) {
+        await db("DELETE FROM CART WHERE CART_UID = ?", [orderBook[0].CART_UID])
+      }
+
       next();
     } catch (error) {
 
