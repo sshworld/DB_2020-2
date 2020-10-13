@@ -26,7 +26,7 @@
           <td><a style="cursor: pointer" href="/order/<%=sess%>/<%=orderList[i].ORDER_ID%>/detail"><%=orderList[i].ORDER_NUM + '-' + orderList[i].ORDER_ID %></a></td>
           <td><%=orderList[i].ORDER_AMOUNT %>원</td>
           <td>
-            <a style="cursor: pointer" onclick="deleteInfo('')">주문취소</a
+            <a style="cursor: pointer" onclick="deleteInfo('/order/<%=orderList[i].ORDER_ID%>/delete')">주문취소</a
             >
           </td>
         </tr>
@@ -44,7 +44,7 @@
       location.href = url;
     }
     else {
-      location.href = '/order/<%=sess%>';
+      location.href = '/order/orderList';
     }
 
   }
