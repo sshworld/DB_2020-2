@@ -17,9 +17,11 @@ router.get('/basketList', basket.basketList, (req, res) => {
 })
 
 // 장바구니 담기
-router.post('/goBasket', basket.basketList, (req, res) => {
-    res.send(`<script type="text/javascript"> alert("장바구니 담기를 완료 하였습니다."); location.href='/';</script>`)
-})
+router.get('/:uid/:index', basket.goBasket, (req, res) => {
+    var sess = req.session.USER_ID;
+    var userName = req.session.USER_NAME;
+    res.render('index.ejs', {pages: '/', sess : sess, userName : userName});
+});
 
 
 module.exports = router;

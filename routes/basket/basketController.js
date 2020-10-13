@@ -32,7 +32,37 @@ class basketController {
     }
   }
 
-  async ba
+  async goBasket(req, res, next) {
+    try {
+
+      const userId = req.session.USER_ID
+
+      const BOOK_UID = req.params["uid"]
+
+      const count = req.params["index"]
+
+      let cartCheck = await db("SELECT * FROM CART WHERE USER_ID = ?", [userId])
+
+      if(cartCheck.length <= 0) {
+        await db("INSERT INTO CART SET ?", {
+          USER_ID: userId
+        });
+      }
+
+      let cart = await db("SELECT * FROM CART WHERE USER_ID = ?", [userId])
+
+      await db("INSERT INTO CART_LIST SET ?", {
+        CART_UID : cart[0].CART_UID,
+        BOOK_UID : BOOK_UID,
+        CART_COUNT : count
+      })
+
+      next()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 }
 
 module.exports = basketController;

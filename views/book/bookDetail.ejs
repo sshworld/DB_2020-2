@@ -21,8 +21,8 @@
             <br>
             <input style="border: 0; width: auto; text-align: center;" type="text" id="price" value="" hidden>
             <br><br>
-            <input class="btn btn-outline-secondary" type="submit" value="구매하기" onclick="order('/order/<%=detailBook.BOOK_UID%>/');">
-            <input class="btn btn-outline-secondary" type="submit" value="장바구니담기" onclick="basket();">
+            <input class="btn btn-outline-secondary" type="submit" value="구매하기" onclick="order('/order/<%=detailBook.BOOK_UID%>/', '<%=detailBook.BOOK_COUNT%>');">
+            <input class="btn btn-outline-secondary" type="submit" value="장바구니담기" onclick="basket('/basket/<%=detailBook.BOOK_UID%>/', '<%=detailBook.BOOK_COUNT%>');">
 
         </td>
     </tr>
@@ -53,10 +53,16 @@
 
     }
 
-    function order(url) {
+    function order(url, count) {
 
         if(parseInt(document.getElementById('bookCount').value) == 0) {
             alert("구매 수량이 0개입니다.")
+        }
+        else if(parseInt(document.getElementById('bookCount').value) > parseInt(count)) {
+            alert("책 재고보다 주문 수량이 많습니다.")
+            document.getElementById('bookCount').value = 0
+            document.getElementById('price').hidden = true
+            document.getElementById('minus').disabled = true;
         }
         else {
             location.href = url + document.getElementById('bookCount').value;
@@ -64,8 +70,19 @@
 
     }
 
-    function basket() {
-
+    function basket(url, count) {
+        if(parseInt(document.getElementById('bookCount').value) == 0) {
+            alert("수량이 0개입니다.")
+        }
+        else if(parseInt(document.getElementById('bookCount').value) > parseInt(count)) {
+            alert("책 재고보다 수량이 많습니다.")
+            document.getElementById('bookCount').value = 0
+            document.getElementById('price').hidden = true
+            document.getElementById('minus').disabled = true;
+        }
+        else {
+            location.href = url + document.getElementById('bookCount').value;
+        }
     }
 
 </script>
