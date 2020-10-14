@@ -101,8 +101,6 @@ class basketController {
 
       let cartCheck = await db("SELECT * FROM CART_LIST WHERE CART_UID = ?", [CART_UID])
 
-      console.log(cartCheck)
-
       if(cartCheck.length <= 1) {
         await db("DELETE FROM CART WHERE CART_UID = ? AND USER_ID = ?", [CART_UID, userId])
       }
@@ -137,14 +135,21 @@ class basketController {
       let myAddr = await db("SELECT * FROM ADDR_INFO WHERE USER_ID = ?", [userId]);
       let myCard = await db("SELECT * FROM CARD WHERE USER_ID = ?", [userId]);
 
-      let orderBook = await db("SELECT c.CART_UID, c.CART_COUNT, b.BOOK_UID, b.BOOK_PATH, b.BOOK_NAME, b.BOOK_PUBLISH, b.BOOK_AUTHOR, b.BOOK_DETAIL, b.BOOK_PRICE FROM CART_LIST c, BOOK b WHERE CART_UID = ? AND b.BOOK_UID = c.BOOK_UID", [CART_UID])
-      console.log(orderBook)
+      let orderBook = await db("SELECT c.CART_UID, c.CART_COUNT, b.BOOK_UID, b.BOOK_PATH, b.BOOK_NAME, b.BOOK_PUBLISH, b.BOOK_AUTHOR, b.BOOK_DETAIL, b.BOOK_PRICE, b.BOOK_COUNT FROM CART_LIST c, BOOK b WHERE CART_UID = ? AND b.BOOK_UID = c.BOOK_UID", [CART_UID])
       var count = []
 
       for(var i = 0; i < orderBook.length; i++) {
         count[i] = orderBook[i].CART_COUNT
+        console.log(orderBook[i].BOOK_COUNT)
+        if(count[i] > orderBook[i].BOOK_COUNT) {
+          res.send(
+            `<script type="text/javascript">
+            alert("` + orderBook[i].BOOK_NAME + `의 수량이 장바구니에 담긴 수량보다 적습니다."); 
+            location.href='/basket/basketList';
+            </script>`
+          );
+        }
       }
-      console.log(count )
       
       req.body.myAddr = myAddr
       req.body.myCard = myCard
