@@ -51,16 +51,18 @@ router.post('/additionBook', upload.single('BOOK_FILE'), book.addBook, (req, res
 });
 
 // 책 수정
-router.get("/:uid/book", (req, res) => {
+router.get("/:uid/book", book.updateInfo, (req, res) => {
   var sess = req.session.USER_ID;
   var userName = req.session.USER_NAME;
   const uid = req.params["uid"];
+  const bookInfo = req.body.bookInfo
   
   res.render("index.ejs", {
     pages: "./book/updateBook.ejs",
     sess: sess,
     userName: userName,
-    uid: uid
+    uid: uid,
+    bookInfo : bookInfo
   });
 })
 

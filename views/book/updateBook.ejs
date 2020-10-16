@@ -14,7 +14,7 @@
           type="text"
           id="BOOK_NAME"
           name="BOOK_NAME"
-          value=""
+          value="<%=bookInfo.BOOK_NAME%>"
           class="form-control"
         />
       </div>
@@ -27,7 +27,7 @@
           type="text"
           id="BOOK_PUBLISH"
           name="BOOK_PUBLISH"
-          value=""
+          value="<%=bookInfo.BOOK_PUBLISH%>"
           class="form-control"
         />
       </div>
@@ -40,7 +40,7 @@
           type="text"
           id="BOOK_AUTHOR"
           name="BOOK_AUTHOR"
-          value=""
+          value="<%=bookInfo.BOOK_AUTHOR%>"
           class="form-control"
         />
       </div>
@@ -49,7 +49,7 @@
     <div class="form-group row">
       <label for="BOOK_DETAIL" class="col-sm-3 col-form-label">상세정보</label>
       <div class="col-sm-9">
-        <textarea id="BOOK_DETAIL" name="BOOK_DETAIL" value="" class="form-control" rows="4"></textarea>
+        <textarea id="BOOK_DETAIL" name="BOOK_DETAIL" value="<%=bookInfo.BOOK_DETAIL%>" class="form-control" rows="4"><%=bookInfo.BOOK_DETAIL%></textarea>
       </div>
     </div>
 
@@ -60,7 +60,7 @@
           type="text"
           id="BOOK_PRICE"
           name="BOOK_PRICE"
-          value=""
+          value="<%=bookInfo.BOOK_PRICE%>"
           class="form-control"
         />
       </div>
@@ -73,7 +73,7 @@
           type="text"
           id="BOOK_COUNT"
           name="BOOK_COUNT"
-          value=""
+          value="<%=bookInfo.BOOK_COUNT%>"
           class="form-control"
         />
       </div>
@@ -86,6 +86,7 @@
           type="file"
           id="BOOK_FILE"
           name="BOOK_FILE"
+          value="<%=bookInfo.BOOK_FILE%>"
         />
       </div>
     </div>

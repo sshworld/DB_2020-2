@@ -4,13 +4,13 @@
     <div class="form-group">
         <div class="form-group">
             <label for="USER_PW" class="col-form-label">
-                <input type="text" id="SHIPPING_NUM" name="SHIPPING_NUM" placeholder="우편번호">
+                <input type="text" id="SHIPPING_NUM" name="SHIPPING_NUM" placeholder="우편번호" value="<%=addrInfo.SHIPPING_NUM %>">
                 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
             </label>
 
         </div>
-        <input type="text" id="BASIC_ADDR" name="BASIC_ADDR" placeholder="주소" class="form-control"><br>
-        <input type="text" id="DETAIL_ADDR" name="DETAIL_ADDR" placeholder="상세주소" class="form-control">
+        <input type="text" id="BASIC_ADDR" name="BASIC_ADDR" placeholder="주소" class="form-control" value="<%=addrInfo.BASIC_ADDR %>"><br>
+        <input type="text" id="DETAIL_ADDR" name="DETAIL_ADDR" placeholder="상세주소" class="form-control" value="<%=addrInfo.DETAIL_ADDR %>">
     </div>
 
     <!-- Submit button -->

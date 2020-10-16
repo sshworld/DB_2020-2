@@ -16,9 +16,8 @@
       <h3>장바구니 번호 :<%= cartList[0].CART_NUM + '-' + cartList[0].CART_UID%> 생성일자 : <%=cartList[0].CREATED_AT%></h3>
       <thead>
         <tr>
-          <th scope="col" rowspan="3">상품정보</th>
-          <th></th>
-          <th></th>
+          <th scope="col" rowspan="3">상품 사진</th>
+          <th>상품 명</th>
           <th scope="col">책금액(수량)</th>
           <th scope="col">주문금액</th>
           <th></th>
@@ -29,8 +28,11 @@
         <tr>
           <td><img src="/images/book/<%=cartList[i].BOOK_PATH%>" alt="<%=i%>" width="80" height="80"></td>
           <td><%=cartList[i].BOOK_NAME %><br><%=cartList[i].BOOK_PUBLISH%> / <%=cartList[i].BOOK_AUTHOR%></td>
-          <td></td>
-          <td><%=cartList[i].BOOK_PRICE %>원<br><%=cartList[i].CART_COUNT %>권</td>
+          <td><%=cartList[i].BOOK_PRICE %>원<br>
+            <input class="btn btn-outline-secondary" type="button" id="minus" onclick="minus('<%=cartList[i].BOOK_UID%>');" value ="-">
+            <input type="text" style="text-align: center;" name="cartCount<%=cartList[i].BOOK_UID%>" id="cartCount<%=cartList[i].BOOK_UID%>" value="<%=cartList[i].CART_COUNT %>" size="1">
+            <input class="btn btn-outline-secondary" type="button" id="plus" onclick="plus('<%=cartList[i].BOOK_UID%>', '<%=cartList[i].BOOK_COUNT%>');" value="+">
+          </td>
           <td><%=cartList[i].BOOK_PRICE * cartList[i].CART_COUNT %>원</td>
           <td><a style="cursor: pointer"
               onclick="deleteInfo('/basket/<%=cartList[i].CART_UID%>/<%=cartList[i].BOOK_UID%>/delete')">삭제</a></td>
@@ -38,7 +40,7 @@
         <% } %>
       </tbody>
     </table>
-    <button onclick="location.href = '/basket/<%=cartList[0].CART_UID%>/order';">주문하기</button>
+    <button class="btn btn-outline-secondary" onclick="location.href = '/basket/<%=cartList[0].CART_UID%>/order';">주문하기</button>
   </div>
   <% } %>
 
@@ -55,4 +57,40 @@
       }
 
     }
+
+    function minus(index) {
+      var textId = 'cartCount' + index
+      var btn = document.getElementById('minus');
+
+      document.getElementById(textId).value = parseInt(document.getElementById(textId).value) - 1;
+
+
+      if(parseInt(document.getElementById(textId).value) < 1) {
+        alert("수량이 0개가 될 수 없습니다.")
+        document.getElementById(textId).value = 1
+      }
+      else {
+        location.href = "/basket/" + index + "/" + document.getElementById(textId).value + "/update"
+      }
+
+    }
+
+    function plus(index, count) {
+      var textId = 'cartCount' + index
+      document.getElementById(textId).value = parseInt(document.getElementById(textId).value) + 1;
+
+      if(parseInt(document.getElementById(textId).value) > count) {
+        alert("남아있는 책(" + count + "권)보다 더 주문할 수 없습니다.")
+        document.getElementById(textId).value = count
+      }
+      else if (parseInt(document.getElementById(textId).value) < 1){
+        alert("수량이 0개가 될 수 없습니다.")
+        document.getElementById(textId).value = 1
+      }
+      else {
+        location.href = "/basket/" + index + "/" + document.getElementById(textId).value + "/update"
+      }
+    }
+  
+
   </script>

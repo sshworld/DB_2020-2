@@ -23,7 +23,7 @@ class basketController {
 
       const userId = req.session.USER_ID
 
-      let cartList = await db("SELECT b.BOOK_PATH, b.BOOK_NAME, b.BOOK_PUBLISH, b.BOOK_AUTHOR, b.BOOK_PRICE, cl.CART_COUNT, c.CART_UID, b.BOOK_UID, DATE_FORMAT(c.CREATED_AT, '%Y%m%d') AS CART_NUM, date_format(c.CREATED_AT, '%Y-%m-%d %T') AS CREATED_AT FROM CART c, BOOK b, CART_LIST cl WHERE c.CART_UID = cl.CART_UID AND b.BOOK_UID = cl.BOOK_UID AND c.USER_ID = ?", [userId])
+      let cartList = await db("SELECT b.BOOK_PATH, b.BOOK_NAME, b.BOOK_PUBLISH, b.BOOK_AUTHOR, b.BOOK_PRICE, b.BOOK_COUNT, cl.CART_COUNT, c.CART_UID, b.BOOK_UID, DATE_FORMAT(c.CREATED_AT, '%Y%m%d') AS CART_NUM, date_format(c.CREATED_AT, '%Y-%m-%d %T') AS CREATED_AT FROM CART c, BOOK b, CART_LIST cl WHERE c.CART_UID = cl.CART_UID AND b.BOOK_UID = cl.BOOK_UID AND c.USER_ID = ?", [userId])
       
       req.body.cartList = cartList
 
@@ -70,12 +70,31 @@ class basketController {
         })
 
       if (putCart.errno == 1062) {
-        await db("UPDATE CART_LIST SET CART_COUNT = (CART_COUNT + ?) WHERE BOOK_UID = ?", [count, BOOK_UID])
+        await db("UPDATE CART_LIST SET CART_COUNT = (CART_COUNT + ?) WHERE CART_UID = ? AND BOOK_UID = ?", [count, cart[0].CART_UID, BOOK_UID])
       }
       
 
       next()
       
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  // 장바구니 수정
+  async updateBasket(req, res, next) {
+    try {
+      
+      const userId = req.session.USER_ID
+      const BOOK_UID = req.params["uid"]
+      const count = req.params["index"]
+
+      let cartId = await db("SELECT CART_UID FROM CART WHERE USER_ID = ?", [userId])
+
+      await db("UPDATE CART_LIST SET CART_COUNT = ? WHERE CART_UID = ? AND BOOK_UID = ?", [count, cartId[0].CART_UID, BOOK_UID])
+
+      next()
+
     } catch (error) {
       console.log(error)
     }
@@ -140,7 +159,7 @@ class basketController {
 
       for(var i = 0; i < orderBook.length; i++) {
         count[i] = orderBook[i].CART_COUNT
-        console.log(orderBook[i].BOOK_COUNT)
+        
         if(count[i] > orderBook[i].BOOK_COUNT) {
           res.send(
             `<script type="text/javascript">

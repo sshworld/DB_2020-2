@@ -33,6 +33,11 @@ router.get('/:uid/:index', basket.goBasket, (req, res) => {
     res.send(`<script type="text/javascript"> alert("장바구니에 담았습니다."); location.href='/';</script>`)
 });
 
+// 장바구니 수정
+router.get('/:uid/:index/update', basket.updateBasket, (req, res) => {
+    res.send(`<script type="text/javascript"> location.href='/basket/basketList';</script>`)
+})
+
 // 장바구니 삭제
 router.get('/:cart/:book/delete', basket.deleteList, (req, res) => {
     res.send(`<script type="text/javascript"> alert("장바구니를 삭제하였습니다."); location.href='/basket/basketList';</script>`)

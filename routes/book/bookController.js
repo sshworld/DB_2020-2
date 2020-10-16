@@ -68,6 +68,24 @@ class bookController {
       console.log(error);
     }
   }
+  
+  // 책 수정 시 책의 정보
+  async updateInfo(req, res, next) {
+    try {
+      const BOOK_UID = req.params["uid"]
+
+      let bookInfo = await db("SELECT * FROM BOOK WHERE BOOK_UID = ?", [BOOK_UID])
+
+      bookInfo = bookInfo[0]
+
+      req.body.bookInfo = bookInfo
+
+      next()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   // 책 수정
 

@@ -42,16 +42,18 @@ router.post("/:id/addAddr", myPage.createAddr, (req, res) => {
 });
 
 // 주소 수정
-router.get("/:id/:uid/addr", (req, res) => {
+router.get("/:id/:uid/addr", myPage.uploadAddr, (req, res) => {
   var sess = req.session.USER_ID;
   var userName = req.session.USER_NAME;
   const uid = req.params["uid"];
+  const addrInfo = req.body.addrInfo
   
   res.render("index.ejs", {
     pages: "./myPage/updateAddr.ejs",
     sess: sess,
     userName: userName,
-    uid: uid
+    uid: uid,
+    addrInfo : addrInfo
   });
 })
 
@@ -91,16 +93,18 @@ router.post("/:id/addCard", myPage.createCard, (req, res) => {
 });
 
 // 카드 수정
-router.get("/:id/:uid/card", (req, res) => {
+router.get("/:id/:uid/card", myPage.uploadCard, (req, res) => {
   var sess = req.session.USER_ID;
   var userName = req.session.USER_NAME;
   const uid = req.params["uid"];
+  const cardInfo = req.body.cardInfo
   
   res.render("index.ejs", {
     pages: "./myPage/updateCard.ejs",
     sess: sess,
     userName: userName,
-    uid: uid
+    uid: uid,
+    cardInfo: cardInfo
   });
 })
 

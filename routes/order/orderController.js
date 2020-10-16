@@ -157,7 +157,6 @@ class orderController {
       let orderInfo = await db("SELECT * FROM ORDERED WHERE USER_ID = ? AND ORDER_ID = ?", [userId, ORDER_ID])
 
       req.body.orderDetail = orderDetail
-      console.log(orderDetail)
       req.body.orderInfo = orderInfo[0]
 
       next()

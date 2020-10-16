@@ -52,6 +52,25 @@ class myPageController {
     }
   }
 
+  // 주소 수정 시 주소 정보
+  async uploadAddr(req, res, next) {
+    try {
+      const userId = req.params["id"];
+      const ADDR_UID = req.params["uid"];
+
+      let addrInfo = await db("SELECT * FROM ADDR_INFO WHERE ADDR_UID = ? AND USER_ID = ?", [ADDR_UID, userId])
+
+      addrInfo = addrInfo[0]
+
+      req.body.addrInfo = addrInfo
+
+      next()
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   // 주소 수정
   async updateAddr(req, res, next) {
     try {
@@ -122,6 +141,26 @@ class myPageController {
         next();
       }
 
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
+
+  // 카드 수정 시 카드 정보
+  async uploadCard(req, res, next) {
+    try {
+      const userId = req.params["id"];
+      const CARD_ID = req.params["uid"];
+
+      let cardInfo = await db("SELECT * FROM CARD WHERE CARD_ID = ? AND USER_ID = ?", [CARD_ID, userId])
+
+      cardInfo = cardInfo[0]
+
+      req.body.cardInfo = cardInfo
+
+      next()
+      
     } catch (error) {
       console.log(error)
     }
