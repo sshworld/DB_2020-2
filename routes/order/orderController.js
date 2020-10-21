@@ -23,7 +23,8 @@ class orderController {
 
       const userId = req.session.USER_ID
       const BOOK_UID = req.params["uid"]
-      const count = req.params["index"]
+      const count = []
+      count[0] = req.params["index"]
 
       let myAddr = await db("SELECT * FROM ADDR_INFO WHERE USER_ID = ?", [userId]);
       let myCard = await db("SELECT * FROM CARD WHERE USER_ID = ?", [userId]);
@@ -37,7 +38,7 @@ class orderController {
       req.session.count = count
 
       next()
-
+ 
     } catch (error) {
       console.log(error)
 
