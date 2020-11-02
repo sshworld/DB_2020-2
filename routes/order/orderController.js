@@ -31,6 +31,12 @@ class orderController {
 
       let orderBook = await db("SELECT * FROM BOOK WHERE BOOK_UID = ?", [BOOK_UID])
 
+      for(var i = 0; i < count.length; i++) {
+        if(count[i] <= 0) {
+          res.send('<script type="text/javascript">alert("도서 수량을 똑바로 적어주세요.");history.back();</script>');
+        }
+      }
+
 
       req.body.myAddr = myAddr
       req.body.myCard = myCard

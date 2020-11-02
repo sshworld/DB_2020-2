@@ -53,6 +53,10 @@ class basketController {
 
       const count = req.params["index"]
 
+      if(count <= 0) {
+        res.send('<script type="text/javascript">alert("도서 수량을 똑바로 적어주세요.");history.back();</script>');
+      }
+
       let cartCheck = await db("SELECT * FROM CART WHERE USER_ID = ?", [userId])
 
       if(cartCheck.length <= 0) {

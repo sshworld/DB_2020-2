@@ -27,13 +27,12 @@
       </td>
       <td width="*" align="left" valign="top">
         <li><a style="color : black" href="/book/<%=bookInfo[i].BOOK_UID%>/detail">책 이름 : <%=bookInfo[i].BOOK_NAME %></a></li>
-        <li>출판사 / 작가 : <%=bookInfo[i].BOOK_PUBLISH %> | <%=bookInfo[i].BOOK_AUTHOR %></li>
+        <li>출판사 / 작가 : <%=bookInfo[i].BOOK_PUBLISH %> / <%=bookInfo[i].BOOK_AUTHOR %></li>
         <li>세부 정보 : <%=bookInfo[i].BOOK_DETAIL %></li>
         <% if((bookInfo[i].BOOK_PRICE) > 1000) { %>
-        <li>가격 : <%=parseInt(bookInfo[i].BOOK_PRICE / 1000) %>,<%=bookInfo[i].BOOK_PRICE % 1000 %>원</li>
-        <% } else { %>
+        <% bookInfo[i].BOOK_PRICE = bookInfo[i].BOOK_PRICE.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') %>
+        <% }%>
         <li>가격 : <%=bookInfo[i].BOOK_PRICE %>원</li>
-        <% } %>
         <li>남은 수량 : <%=bookInfo[i].BOOK_COUNT %>개</li>
       </td>
     </tr>
